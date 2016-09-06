@@ -18,6 +18,7 @@ char board[boardSize][boardSize];
 void printBoard(void);
 void clearBoard(void);
 
+/* Main function that handles all cursor movements. */
 void main(void){
 	char direction;
 	int  x_pos = 0;
@@ -25,7 +26,9 @@ void main(void){
 
 	printBoard();
 	while(1) {
+		/* gets a character from the console */
 		direction = getchar();
+		/*handles what character was sent */
 		if (direction == left) {
 			if (x_pos != 0){
 				x_pos--;
@@ -79,6 +82,7 @@ void printBoard(void){
 	}
 }
 
+/* Function for clearing the board */
 void clearBoard(void){
 	int x =0;
 	int y =0;
