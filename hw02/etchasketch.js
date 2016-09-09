@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 var b = require('bonescript');
+var util = require('util');
 var button1 = 'P9_11';
 var button2 = 'P9_13';
 var button3 = 'P9_16';
@@ -34,7 +35,10 @@ b.attachInterrupt(button4, true,
 b.attachInterrupt(button5, true,
 	b.FALLING, clear);
 
-function updateLeft(){
+function updateLeft(x){
+    if (x.attached === true){
+        return;
+    }
     console.log("left");
     if (xPos !== 0){
         xPos--;
@@ -45,7 +49,10 @@ function updateLeft(){
     }
 }
 
-function updateRight(){
+function updateRight(x){
+    if (x.attached === true){
+        return;
+    }
     console.log("right");
     if (xPos !== width){
         xPos++;
@@ -56,7 +63,10 @@ function updateRight(){
     }
 }
 
-function updateUp(){
+function updateUp(x){
+    if (x.attached === true){
+        return;
+    }
     console.log("up");
     if (yPos !== 0){
         yPos--;
@@ -67,7 +77,10 @@ function updateUp(){
     }
 }
 
-function updateDown(){
+function updateDown(x){
+    if (x.attached === true){
+        return;
+    }
     console.log("down");
     if (yPos !== width){
         yPos++;
