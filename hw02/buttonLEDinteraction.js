@@ -2,7 +2,7 @@
 var b = require('bonescript');
 var button1 = 'P9_11';
 var button2 = 'P9_13';
-var button3 = 'P9_15';
+var button3 = 'P9_16';
 var button4 = 'P9_17';
 var LED1 = 'P9_21'
 var LED2 = 'P9_23'
@@ -27,45 +27,43 @@ b.pinMode(LED3, b.OUTPUT);
 b.pinMode(LED4, b.OUTPUT);
 
 b.attachInterrupt(button1, true,
-	b.CHANGE, flash, one);
+	b.CHANGE, flash1);
 b.attachInterrupt(button2, true,
-	b.CHANGE, flash, two);
+	b.CHANGE, flash2);
 b.attachInterrupt(button3, true,
-	b.CHANGE, flash), three;
+	b.CHANGE, flash3);
 b.attachInterrupt(button4, true,
-	b.CHANGE, flash, four);
+	b.CHANGE, flash4);
 
-function flash(led){
-	if (led === one){
-		b.digitalWrite(LED1, state1);
-		if(state1 === b.HIGH) {
-			state1 = b.LOW;
-		} else {
-			state1 = b.HIGH
-		}
+function flash1(){
+	b.digitalWrite(LED1, state1);
+	if(state1 === b.HIGH) {
+		state1 = b.LOW;
+	} else {
+		state1 = b.HIGH
 	}
-	if (led === two){
-		b.digitalWrite(LED2, state2);
-		if(state2 === b.HIGH) {
-			state2 = b.LOW;
-		} else {
-			state2 = b.HIGH
-		}
+}
+function flash2(){
+	b.digitalWrite(LED2, state2);
+	if(state2 === b.HIGH) {
+		state2 = b.LOW;
+	} else {
+		state2 = b.HIGH
 	}
-	if (led === three){
-		b.digitalWrite(LED3, state3);
-		if(state3 === b.HIGH) {
-			state3 = b.LOW;
-		} else {
-			state3 = b.HIGH
-		}
+}
+function flash3(){
+	b.digitalWrite(LED3, state3);
+	if(state3 === b.HIGH) {
+		state3 = b.LOW;
+	} else {
+		state3 = b.HIGH
 	}
-	if (led === four){
-		b.digitalWrite(LED4, state4);
-		if(state4 === b.HIGH) {
-			state4 = b.LOW;
-		} else {
-			state4 = b.HIGH
-		}
+}
+function flash4(){
+	b.digitalWrite(LED4, state4);
+	if(state4 === b.HIGH) {
+		state4 = b.LOW;
+	} else {
+		state4 = b.HIGH
 	}
 }
