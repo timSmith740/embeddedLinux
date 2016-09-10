@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* Variable declarations */
 var b = require('bonescript');
 var util = require('util');
 var button1 = 'P9_11';
@@ -11,6 +12,7 @@ var yPos = 0;
 var width = 5;
 var board = [];
 
+/* Writing basis of board */
 for(i = 0; i < width; i++){
     board[i]=[];
     for (j =0; j < width; j++){
@@ -18,6 +20,7 @@ for(i = 0; i < width; i++){
     }
 }
 
+/* Initializing buttons */
 b.pinMode(button1, b.INPUT, 7, 'pulldown');
 b.pinMode(button2, b.INPUT, 7, 'pulldown');
 b.pinMode(button3, b.INPUT, 7, 'pulldown');
@@ -35,6 +38,7 @@ b.attachInterrupt(button4, true,
 b.attachInterrupt(button5, true,
 	b.FALLING, clear);
 
+/*Function for updating board*/
 function updateLeft(x){
     if (x.attached === true){
         return;
@@ -96,7 +100,7 @@ function updateBoard(){
         console.log(board[i]);
     }
 }
-
+/*Function for clearing the board */
 function clear(){
     for(i = 0; i < width; i++){
         for(j = 0; j < width; j++){
@@ -105,5 +109,6 @@ function clear(){
     }
     xPos = 0;
     yPos = 0;
+    board[yPos][xPos] = 'X';
     updateBoard();
 }
