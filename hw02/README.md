@@ -11,3 +11,10 @@ The up button is attached to pin 11. The right button attached to pin 13. The le
 A clear button is attached to pin 21. 
 
 You can run the etchasketch.js as a bonescript file.
+
+==========
+Comments from Prof. Yoder
+
+It works!
+
+Grade:  10/10
