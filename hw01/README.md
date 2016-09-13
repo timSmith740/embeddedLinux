@@ -10,3 +10,9 @@ That will move the cursor in the left, right, up, or down direction respectively
 You can also type in c and it will clear the board, but leave the cursor where it was.
 
 You can quit the program by typing in q.
+
+==========
+Comments by Prof. Yoder
+It works.
+
+Grade:  10/10

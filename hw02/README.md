@@ -1,12 +1,20 @@
 # embeddedLinux
 
-I have done steps 1,3,4,5,6,and 7.
+For the buttons and LED interaction, my buttons are wired up to pins 11,13,16, and 17.
+Pin 15 did not seem to work for me. It was not being registered.
+My LEDs are hooked up to pins 21,23,26,27.
+You can run the buttonLEDinteraction.js as a bonescript file, where a button controls a corrseponding LED. 
 
-I do not have the labels to attach to my Beaglebone right now.
+For my updated etch-a-sketch, you can change the size of the board by changing the variable width in the file.
 
-After compiling my code and running the executable. You can move the cursor by typing in l,r,u,or d.
-That will move the cursor in the left, right, up, or down direction respectively. It will update the board after you input your command.
+The up button is attached to pin 11. The right button attached to pin 13. The left button attached to pin 17. The down button attached to pin 15.
+A clear button is attached to pin 21. 
 
-You can also type in c and it will clear the board, but leave the cursor where it was.
+You can run the etchasketch.js as a bonescript file.
 
-You can quit the program by typing in q.
+==========
+Comments from Prof. Yoder
+
+It works!
+
+Grade:  10/10
