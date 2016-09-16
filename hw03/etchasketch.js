@@ -19,9 +19,9 @@ var five = 0x08;
 var six = 0x04;
 var seven = 0x02
 var eight = 0x01;
-var board = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+var board = [0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00];
-var clearBoard = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+var clearBoard = [0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00];
     
 var wire = new i2c(0x70, {device: '/dev/i2c-2'});
@@ -42,7 +42,7 @@ b.attachInterrupt(button3, true,
 b.attachInterrupt(button4, true,
 	b.FALLING, updateLeft);
 b.attachInterrupt(button5, true,
-	b.FALLING, clear);
+	b.FALLING, reset);
 
 /*Function for updating board*/
 function updateLeft(x){
@@ -128,13 +128,13 @@ function updateBoard(){
     }
 }
 /*Function for clearing the board */
-function clear(x){
+function reset(x){
     if (x.attached === true){
         return;
     }
     wire.writeBytes(0x00,clearBoard,function(err){});
-    for (var y; y<width; y++){
-        board[y] = clearBoard[y];
+    for(i=0; i<width; i++){
+        board[i*2] = clearBoard[i*2];
     }
     xPos = 0;
     yPos = 0;
