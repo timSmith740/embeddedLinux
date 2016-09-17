@@ -12,16 +12,22 @@ b.pinMode(alert1, b.INPUT, 7, 'disabled');
 b.pinMode(alert2, b.INPUT, 7, 'disabled');
 
 b.attachInterrupt(alert1, true,
-	b.RISING, alertOne);
+	b.LOW, alertOne);
 b.attachInterrupt(alert2, true,
-	b.RISING, alertTwo);
+	b.FALLING, alertTwo);
 	
-function alertOne(){
+function alertOne(x){
+    if (x.attached === true){
+        return;
+    }
     console.log("alert1");
     temp = temp1.readByte(function(err, data){});
     console.log(((temp*9)/5)+32);
 }
-function alertTwo(){
+function alertTwo(x){
+    if (x.attached === true){
+        return;
+    }
     console.log("alert2");
     temp = temp2.readByte(function(err){});
     console.log(((temp*9)/5)+32);
