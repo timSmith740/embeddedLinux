@@ -7,3 +7,6 @@ You can run my temp.sh file and it will read a temp101 sensor at address 0x48.
 
 If you run my tempSetup.sh file it will prepare temp101sensor on addresses 0x48 and 0x49.
 It prints the temperature after getting an alert, but it does at times stop reading.
+
+You can run my temp006sensor.sh file and it will read and convert the temperature with the sensor on address 0x40.
+Though it does not seem to be very accurate. 
