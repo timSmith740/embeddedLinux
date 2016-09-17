@@ -12,7 +12,7 @@ b.pinMode(alert1, b.INPUT, 7, 'disabled');
 b.pinMode(alert2, b.INPUT, 7, 'disabled');
 
 b.attachInterrupt(alert1, true,
-	b.LOW, alertOne);
+	b.FALLING, alertOne);
 b.attachInterrupt(alert2, true,
 	b.FALLING, alertTwo);
 	
