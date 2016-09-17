@@ -8,9 +8,12 @@ var button2 = 'P9_13';
 var button3 = 'P9_16';
 var button4 = 'P9_17';
 var button5 = 'P9_21';
+var button6 = 'P9_18';
+var color = 0;
 var xPos = 0;
 var yPos = 0;
 var width = 8;
+var zero = 0x00;
 var one = 0x80;
 var two = 0x40;
 var three = 0x20;
@@ -35,6 +38,7 @@ b.pinMode(button2, b.INPUT, 7, 'pulldown');
 b.pinMode(button3, b.INPUT, 7, 'pulldown');
 b.pinMode(button4, b.INPUT, 7, 'pulldown');
 b.pinMode(button5, b.INPUT, 7, 'pulldown');
+b.pinMode(button6, b.INPUT, 7, 'pulldown');
 
 b.attachInterrupt(button1, true,
 	b.FALLING, updateUp);
@@ -46,6 +50,8 @@ b.attachInterrupt(button4, true,
 	b.FALLING, updateLeft);
 b.attachInterrupt(button5, true,
 	b.FALLING, reset);
+b.attachInterrupt(button6, true,
+	b.FALLING, switchColor);
 
 /*Function for updating board*/
 function updateLeft(x){
@@ -56,7 +62,6 @@ function updateLeft(x){
     if (xPos !== 0){
         xPos--;
         updateBoard();
-        wire.writeBytes(0x00,board, function(err){});
     } else {
         xPos = 0;
     }
@@ -70,7 +75,6 @@ function updateRight(x){
     if (xPos !== width){
         xPos++;
         updateBoard();
-        wire.writeBytes(0x00,board, function(err){});
     } else {
         xPos = 0;
     }
@@ -84,7 +88,6 @@ function updateUp(x){
     if (yPos !== 0){
         yPos--;
         updateBoard();
-        wire.writeBytes(0x00,board, function(err){});
     } else {
         yPos = 0;
     }
@@ -98,37 +101,22 @@ function updateDown(x){
     if (yPos !== width){
         yPos++;
         updateBoard();
-        wire.writeBytes(0x00,board, function(err){});
     } else {
         yPos = 0;
     }
 }
 
 function updateBoard(){
-    if (yPos === 0){
-        board[xPos*2] = board[xPos*2] | one;
+    if (color === 0){
+        placeGreen();
     }
-    else if (yPos === 1){
-        board[xPos*2] = board[xPos*2] | two;
+    if (color === 1){
+        placeRed();
     }
-    else if (yPos === 2){
-        board[xPos*2] = board[xPos*2] | three;
+    if (color === 2){
+        placeYellow();
     }
-    else if (yPos === 3){
-        board[xPos*2] = board[xPos*2] | four;
-    }
-    else if (yPos === 4){
-        board[xPos*2] = board[xPos*2] | five;
-    }
-    else if (yPos === 5){
-        board[xPos*2] = board[xPos*2] | six;
-    }
-    else if (yPos === 6){
-        board[xPos*2] = board[xPos*2] | seven;
-    }
-    else if (yPos === 7){
-        board[xPos*2] = board[xPos*2] | eight;
-    }
+    wire.writeBytes(0x00,board, function(err){});
 }
 /*Function for clearing the board */
 function reset(x){
@@ -138,7 +126,119 @@ function reset(x){
     wire.writeBytes(0x00,clearBoard,function(err){});
     for(i=0; i<width; i++){
         board[i*2] = clearBoard[i*2];
+        board[i*2+1] = clearBoard[i*2];
     }
     xPos = 0;
     yPos = 0;
+}
+function switchColor(x){
+    if (x.attached === true){
+        return;
+    }
+    color++;
+    if (color > 2){
+        color = 0;
+    }
+}
+function placeRed(){
+    if (yPos === 0){
+        board[xPos*2] = board[xPos*2] | zero;
+        board[xPos*2+1] = board[xPos*2+1] | one;
+    }
+    else if (yPos === 1){
+        board[xPos*2] = board[xPos*2] | zero;
+        board[xPos*2+1] = board[xPos*2+1] | two;
+    }
+    else if (yPos === 2){
+        board[xPos*2] = board[xPos*2] | zero;
+        board[xPos*2+1] = board[xPos*2+1] | three;
+    }
+    else if (yPos === 3){
+        board[xPos*2] = board[xPos*2] | zero;
+        board[xPos*2+1] = board[xPos*2+1] | four;
+    }
+    else if (yPos === 4){
+        board[xPos*2] = board[xPos*2] | zero;
+        board[xPos*2+1] = board[xPos*2+1] | five;
+    }
+    else if (yPos === 5){
+        board[xPos*2] = board[xPos*2] | zero;
+        board[xPos*2+1] = board[xPos*2+1] | six;
+    }
+    else if (yPos === 6){
+        board[xPos*2] = board[xPos*2] | zero;
+        board[xPos*2+1] = board[xPos*2+1] | seven;
+    }
+    else if (yPos === 7){
+        board[xPos*2] = board[xPos*2] | zero;
+        board[xPos*2+1] = board[xPos*2+1] | eight;
+    }
+}
+function placeGreen(){
+    if (yPos === 0){
+        board[xPos*2+1] = board[xPos*2+1] | zero;
+        board[xPos*2] = board[xPos*2] | one;
+    }
+    else if (yPos === 1){
+        board[xPos*2] = board[xPos*2] | two;
+        board[xPos*2+1] = board[xPos*2+1] | zero;
+    }
+    else if (yPos === 2){
+        board[xPos*2] = board[xPos*2] | three;
+        board[xPos*2+1] = board[xPos*2+1] | zero;
+    }
+    else if (yPos === 3){
+        board[xPos*2] = board[xPos*2] | four;
+        board[xPos*2+1] = board[xPos*2+1] | zero;
+    }
+    else if (yPos === 4){
+        board[xPos*2] = board[xPos*2] | five;
+        board[xPos*2+1] = board[xPos*2+1] | zero;
+    }
+    else if (yPos === 5){
+        board[xPos*2] = board[xPos*2] | six;
+        board[xPos*2+1] = board[xPos*2+1] | zero;
+    }
+    else if (yPos === 6){
+        board[xPos*2] = board[xPos*2] | seven;
+        board[xPos*2+1] = board[xPos*2+1] | zero;
+    }
+    else if (yPos === 7){
+        board[xPos*2] = board[xPos*2] | eight;
+        board[xPos*2+1] = board[xPos*2+1] | zero;
+    }
+}
+function placeYellow(){
+    if (yPos === 0){
+        board[xPos*2+1] = board[xPos*2+1] | one;
+        board[xPos*2] = board[xPos*2] | one;
+    }
+    else if (yPos === 1){
+        board[xPos*2] = board[xPos*2] | two;
+        board[xPos*2+1] = board[xPos*2+1] | two;
+    }
+    else if (yPos === 2){
+        board[xPos*2] = board[xPos*2] | three;
+        board[xPos*2+1] = board[xPos*2+1] | three;
+    }
+    else if (yPos === 3){
+        board[xPos*2] = board[xPos*2] | four;
+        board[xPos*2+1] = board[xPos*2+1] | four;
+    }
+    else if (yPos === 4){
+        board[xPos*2] = board[xPos*2] | five;
+        board[xPos*2+1] = board[xPos*2+1] | five;
+    }
+    else if (yPos === 5){
+        board[xPos*2] = board[xPos*2] | six;
+        board[xPos*2+1] = board[xPos*2+1] | six;
+    }
+    else if (yPos === 6){
+        board[xPos*2] = board[xPos*2] | seven;
+        board[xPos*2+1] = board[xPos*2+1] | seven;
+    }
+    else if (yPos === 7){
+        board[xPos*2] = board[xPos*2] | eight;
+        board[xPos*2+1] = board[xPos*2+1] | eight;
+    }
 }
