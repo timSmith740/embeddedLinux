@@ -10,3 +10,12 @@ It prints the temperature after getting an alert, but it does at times stop read
 
 You can run my temp006sensor.sh file and it will read and convert the temperature with the sensor on address 0x40.
 Though it does not seem to be very accurate. 
+
+==========
+Comments from Prof. Mark A. Yoder
+In etchasketch the if/else structures seem cumbersome.  You should be able to collasp that
+into something simpler.
+Code could also use some more documentation.
+
+Grade:  10/10
+
