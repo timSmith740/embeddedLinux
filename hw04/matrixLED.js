@@ -1,7 +1,12 @@
     var socket;
     var firstconnect = true,
         i2cNum  = "0x70",
-	disp = [];
+	dispred = [];
+	dispgreen =[];
+	var color = 0;
+	var green = 0;
+	var red = 1;
+	var yellow = 2;
 
 // Create a matrix of LEDs inside the <table> tags.
 var matrixData;
@@ -24,15 +29,46 @@ $("#slider1").slider({min:0, max:15, slide: function(event, ui) {
 // Send one column when LED is clicked.
 function LEDclick(i, j) {
 //	alert(i+","+j+" clicked");
-    disp[i] ^= 0x1<<j;
-    socket.emit('i2cset', {i2cNum: i2cNum, i: 2*i, 
-			     disp: '0x'+disp[i].toString(16)});
+    if (color === green){
+        dispgreen[i] ^= 0x1<<j;
+          socket.emit('i2cset', {i2cNum: i2cNum, i: 2*i, 
+			     disp: '0x'+dispgreen[i].toString(16)}); 
+    }
+    if (color === red){
+        dispred[i] ^= 0x1<<j;
+        socket.emit('i2cset', {i2cNum: i2cNum, i: 2*i+1, 
+			     disp: '0x'+dispred[i].toString(16)});
+    }
+    if (color === yellow){
+        dispred[i] ^= 0x1<<j;
+        socket.emit('i2cset', {i2cNum: i2cNum, i: 2*i+1, 
+			     disp: '0x'+dispred[i].toString(16)});
+		dispgreen[i] ^= 0x1<<j;
+          socket.emit('i2cset', {i2cNum: i2cNum, i: 2*i, 
+			     disp: '0x'+dispgreen[i].toString(16)}); 
+    }
 //	socket.emit('i2c', i2cNum);
     // Toggle bit on display
-    if(disp[i]>>j&0x1 === 1) {
-        $('#id'+i+'_'+j).addClass('on');
-    } else {
-        $('#id'+i+'_'+j).removeClass('on');
+    if (color === green){
+        if(dispgreen[i]>>j&0x1 === 1) {
+            $('#id'+i+'_'+j).addClass('green');
+        } else {
+            $('#id'+i+'_'+j).removeClass('green');
+        }
+    }
+    if (color === red){
+        if(dispred[i]>>j&0x1 === 1) {
+            $('#id'+i+'_'+j).addClass('red');
+        } else {
+            $('#id'+i+'_'+j).removeClass('red');
+        }
+    }
+    if (color === yellow){
+        if(dispred[i]>>j&0x1 === 1) {
+            $('#id'+i+'_'+j).addClass('yellow');
+        } else {
+            $('#id'+i+'_'+j).removeClass('yellow');
+        }
     }
 }
 
@@ -124,3 +160,13 @@ $(function () {
         i2cNum = $(this).val();
     });
 });
+
+function setRed(){
+    color = red;
+}
+function setGreen(){
+    color = green;
+}
+function setYellow(){
+    color = yellow;
+}

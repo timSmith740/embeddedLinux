@@ -29,9 +29,19 @@ body {
 	background-color: #eeeeee;
 }
 
-.on {
+.green {
 	border: 1px solid #00ee00;
 	background-color: green;
+
+}
+.red {
+	border: 1px solid #00ee00;
+	background-color: red;
+
+}
+.yellow {
+	border: 1px solid #00ee00;
+	background-color: yellow;
 
 }
 
