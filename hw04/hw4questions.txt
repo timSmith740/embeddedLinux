@@ -1,0 +1,4 @@
+1. The boneserver is listening for key words from the browser like i2cset or i2cget. It then uses the appropriate command to execute the function on the bone. It then does nothing to returns the answer back to the browser.
+2. When an LED is clicked the location in the matrix is passed as a parameter where it then XORs the bit selected then it sends a i2cset command to the server which will turn on or off the specified LED in the matrix.
+3. The .on class is used to color the LED.
+4. I plan on using HTML buttons to control the color of the LEDs and have two array to hold the values for red and green. The server will send i2cset messages to the bone to turn on the appropriate LED based on the one that is clicked.
