@@ -43,8 +43,7 @@ int main(int argc, char *argv[]) {
     printf("Mapping %X - %X (size: %X)\n", GPIO0_START_ADDR, GPIO0_END_ADDR, 
                                            GPIO0_SIZE);
 
-    gpio_addr = mmap(0, GPIO0_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 
-                        GPIO0_START_ADDR);
+    gpio_addr = mmap(0, GPIO1_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, GPIO1_START_ADDR);
 
     gpio_oe_addr           = gpio_addr + GPIO_OE;
     gpio_datain            = gpio_addr + GPIO_DATAIN;
@@ -62,15 +61,15 @@ int main(int argc, char *argv[]) {
 
     printf("Start copying GPIO_07 to GPIO_03\n");
     while(keepgoing) {
-    	if(*gpio_datain & GPIO_07) {
-            *gpio_setdataout_addr= GPIO_03;
+    	if(*gpio_datain & GPIO_19) {
+            *gpio_setdataout_addr= USR3;
     	} else {
-            *gpio_cleardataout_addr = GPIO_03;
+            *gpio_cleardataout_addr = USR3;
     	}
         //usleep(1);
     }
 
-    munmap((void *)gpio_addr, GPIO0_SIZE);
+    munmap((void *)gpio_addr, GPIO1_SIZE);
     close(fd);
     return 0;
 }
