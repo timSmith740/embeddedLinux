@@ -10,4 +10,4 @@ My LED matrix.js has three buttons to change to color to red, green, or yellow. 
 light up in the browser and the appropriate LED in the LED matrix with the appropriate color. If you click again with
 the same color on it will turn it off. 
 
-I might try to add some more buttons to add letters to show up on the matrix.
+There are now buttons to clear the screen and buttons for preset letters of the alphabet.

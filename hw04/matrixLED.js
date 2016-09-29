@@ -29,6 +29,7 @@ $("#slider1").slider({min:0, max:15, slide: function(event, ui) {
 // Send one column when LED is clicked.
 function LEDclick(i, j) {
 //	alert(i+","+j+" clicked");
+    // checking which color has been selected
     if (color === green){
         dispgreen[i] ^= 0x1<<j;
           socket.emit('i2cset', {i2cNum: i2cNum, i: 2*i, 
@@ -49,6 +50,7 @@ function LEDclick(i, j) {
     }
 //	socket.emit('i2c', i2cNum);
     // Toggle bit on display
+    // Changing webpage for appropriate color change
     if (color === green){
         if(dispgreen[i]>>j&0x1 === 1) {
             $('#id'+i+'_'+j).addClass('green');
@@ -161,6 +163,7 @@ $(function () {
     });
 });
 
+/* Sets the color to be activated */
 function setRed(){
     color = red;
 }
@@ -169,4 +172,289 @@ function setGreen(){
 }
 function setYellow(){
     color = yellow;
+}
+
+/* Clears the matrix */
+function erase(){
+    for (i = 0; i < 8; i++) {
+        // j cycles through each bit
+        dispred[i] = 0;
+        dispgreen[i] = 0;
+        socket.emit('i2cset', {i2cNum: i2cNum, i: 2*i+1, 
+			     disp: '0x'+dispred[i].toString(16)});
+        socket.emit('i2cset', {i2cNum: i2cNum, i: 2*i, 
+			     disp: '0x'+dispgreen[i].toString(16)}); 
+        for (j = 0; j < 8; j++) {
+            $('#id' + i + '_' + j).removeClass('red');
+            $('#id' + i + '_' + j).removeClass('green');
+            $('#id' + i + '_' + j).removeClass('yellow');
+        }
+    }
+}
+
+/* Displaying a A on the matrix */
+function A(){
+    erase();
+    var arrayx = [1,1,1,1,1,2,2,3,3,4,4,5,5,5,5,5];
+    var arrayy = [5,4,3,2,1,6,3,3,6,6,3,5,4,3,2,1];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+}
+
+/*Displaying a B on the matrix*/
+function B(){
+    erase();
+    var arrayx = [1,1,1,1,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,5];
+    var arrayy = [6,5,4,3,2,1,0,6,3,0,6,3,0,6,3,0,5,4,2,1];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+}
+
+/*Displaying a C on the matrix*/
+function C(){
+    erase();
+    var arrayx = [1,1,1,1,1,2,2,3,3,4,4,5,5];
+    var arrayy = [5,4,3,2,1,6,0,6,0,6,0,5,1];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+
+/*Displaying a D on the matrix*/
+function D(){
+    erase();
+    var arrayx = [1,1,1,1,1,1,1,2,2,3,3,4,4,5,5,5,5,5];
+    var arrayy = [6,5,4,3,2,1,0,6,0,6,0,6,0,5,4,3,2,1];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+
+/*Displaying a E on the matrix*/
+function E(){
+    erase();
+    var arrayx = [1,1,1,1,1,1,1,2,2,2,3,3,3,4,4,4,5,5];
+    var arrayy = [6,5,4,3,2,1,0,6,3,0,6,3,0,6,3,0,6,0];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+
+/*Displaying a F on the matrix*/
+function F(){
+    erase();
+    var arrayx = [1,1,1,1,1,1,1,2,2,3,3,4,4,5];
+    var arrayy = [6,5,4,3,2,1,0,6,3,6,3,6,3,6];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+
+/*Displaying a G on the matrix*/
+function G(){
+    erase();
+    var arrayx = [1,1,1,1,1,2,2,3,3,3,4,4,4,5,5,5];
+    var arrayy = [5,4,3,2,1,6,0,6,2,0,6,2,0,5,2,1];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+
+/*Displaying a H on the matrix*/
+function H(){
+    erase();
+    var arrayx = [1,1,1,1,1,1,1,2,3,4,5,5,5,5,5,5,5];
+    var arrayy = [6,5,4,3,2,1,0,3,3,3,6,5,4,3,2,1,0];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+
+/*Displaying a I on the matrix*/
+function I(){
+    erase();
+    var arrayx = [1,1,2,2,3,3,3,3,3,3,3,4,4,5,5];
+    var arrayy = [6,0,6,0,6,5,4,3,2,1,0,6,0,6,0];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+/*Displaying a J on the matrix*/
+function J(){
+    erase();
+    var arrayx = [1,1,2,3,4,5,5,5,5,5,5];
+    var arrayy = [2,1,0,0,0,1,2,3,4,5,6];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+/*Displaying a K on the matrix*/
+function K(){
+    erase();
+    var arrayx = [1,1,1,1,1,1,1,2,3,3,4,4,5,5];
+    var arrayy = [6,5,4,3,2,1,0,3,4,2,5,1,6,0];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+/*Displaying a L on the matrix*/
+function L(){
+    erase();
+    var arrayx = [1,1,1,1,1,1,1,2,3,4,5];
+    var arrayy = [6,5,4,3,2,1,0,0,0,0,0];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+/*Displaying a M on the matrix*/
+function M(){
+    erase();
+    var arrayx = [1,1,1,1,1,1,1,2,3,4,5,5,5,5,5,5,5];
+    var arrayy = [6,5,4,3,2,1,0,5,4,5,6,5,4,3,2,1,0];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+/*Displaying a N on the matrix*/
+function N(){
+    erase();
+    var arrayx = [1,1,1,1,1,1,1,2,3,4,5,5,5,5,5,5,5];
+    var arrayy = [6,5,4,3,2,1,0,4,3,2,6,5,4,3,2,1,0];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+/*Displaying a O on the matrix*/
+function O(){
+    erase();
+    var arrayx = [1,2,3,4,5,5,5,5,5,4,3,2,1,1,1,1];
+    var arrayy = [5,6,6,6,5,4,3,2,1,0,0,0,1,2,3,4];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+/*Displaying a P on the matrix*/
+function P(){
+    erase();
+    var arrayx = [1,1,1,1,1,1,1,2,3,4,5,5,5,4,3,2];
+    var arrayy = [0,1,2,3,4,5,6,6,6,6,5,4,3,2,2,2];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+/*Displaying a Q on the matrix*/
+function Q(){
+    erase();
+    var arrayx = [1,1,1,1,1,2,3,4,5,5,5,5,5,4,3,2,3,4,5];
+    var arrayy = [5,4,3,2,1,0,0,0,1,2,3,4,5,6,6,6,2,1,0];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+/*Displaying a R on the matrix*/
+function R(){
+    erase();
+    var arrayx = [1,1,1,1,1,1,1,2,3,4,5,5,5,4,3,2,5,5];
+    var arrayy = [0,1,2,3,4,5,6,6,6,6,5,4,3,2,2,2,1,0];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+/*Displaying a S on the matrix*/
+function S(){
+    erase();
+    var arrayx = [5,4,3,2,1,1,2,3,4,5,5,4,3,2,1];
+    var arrayy = [5,6,6,6,5,4,3,3,3,2,1,0,0,0,1];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+/*Displaying a T on the matrix*/
+function T(){
+    erase();
+    var arrayx = [1,2,3,4,5,3,3,3,3,3,3];
+    var arrayy = [6,6,6,6,6,5,4,3,2,1,0];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+/*Displaying a U on the matrix*/
+function U(){
+    erase();
+    var arrayx = [1,1,1,1,1,1,2,3,4,5,5,5,5,5,5];
+    var arrayy = [6,5,4,3,2,1,0,0,0,1,2,3,4,5,6];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+/*Displaying a V on the matrix*/
+function V(){
+    erase();
+    var arrayx = [1,1,1,1,1,2,3,4,5,5,5,5,5];
+    var arrayy = [6,5,4,3,2,1,0,1,2,3,4,5,6];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+/*Displaying a W on the matrix*/
+function W(){
+    erase();
+    var arrayx = [1,1,1,1,1,1,1,2,3,4,5,5,5,5,5,5,5];
+    var arrayy = [6,5,4,3,2,1,0,1,2,1,0,1,2,3,4,5,6];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+/*Displaying a X on the matrix*/
+function X(){
+    erase();
+    var arrayx = [1,1,2,3,4,5,5,1,1,2,4,5,5];
+    var arrayy = [6,5,4,3,2,1,0,0,1,2,4,5,6];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+/*Displaying a Y on the matrix*/
+function Y(){
+    erase();
+    var arrayx = [1,1,2,5,5,4,3,3,3,3];
+    var arrayy = [6,5,4,6,5,4,3,2,1,0];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
+}
+/*Displaying a W on the matrix*/
+function Z(){
+    erase();
+    var arrayx = [1,2,3,4,5,5,4,3,2,1,1,2,3,4,5];
+    var arrayy = [6,6,6,6,6,5,4,3,2,1,0,0,0,0,0];
+    for(var i=0; i<arrayx.length; i++){
+        LEDclick(arrayx[i], arrayy[i]);
+    }
+
 }

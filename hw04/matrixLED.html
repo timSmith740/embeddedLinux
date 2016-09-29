@@ -13,16 +13,17 @@
   <body>
   <b>Matrix LED Demo</b>
         <img src="images/RoseLogo96.png" id="RoseLogo"></a>
-<p/>
+<p>
     <button id="connect" onClick='connect()'/>Connect</button>
     <button id="disconnect" onClick='disconnect()'>Disconnect</button>
     <button id="red" onClick='setRed()'>Red</button>
     <button id="green" onClick='setGreen()'>Green</button>
     <button id="yellow" onClick='setYellow()'>Yellow</button>
+    <button id="clear" onClick='erase()'>Clear</button>
     <span id="addresses">
     i2c: <input id="i2cNum" type="text" value="">
     </span>
-<p/>
+</p>
 <p/>
 <div id="update">
   <button id="update" onClick='updateFromLED()'/>
@@ -30,6 +31,34 @@
   </div>
 <table id="matrixLED">
 </table>
+<div id="alphabet">
+  <button onClick='A()'>A</button>
+  <button onClick='B()'>B</button>
+  <button onClick='C()'>C</button>
+  <button onClick='D()'>D</button>
+  <button onClick='E()'>E</button>
+  <button onClick='F()'>F</button>
+  <button onClick='G()'>G</button>
+  <button onClick='H()'>H</button>
+  <button onClick='I()'>I</button>
+  <button onClick='J()'>J</button>
+  <button onClick='K()'>K</button>
+  <button onClick='L()'>L</button>
+  <button onClick='M()'>M</button>
+  <button onClick='N()'>N</button>
+  <button onClick='O()'>O</button>
+  <button onClick='P()'>P</button>
+  <button onClick='Q()'>Q</button>
+  <button onClick='R()'>R</button>
+  <button onClick='S()'>S</button>
+  <button onClick='T()'>T</button>
+  <button onClick='U()'>U</button>
+  <button onClick='V()'>V</button>
+  <button onClick='W()'>W</button>
+  <button onClick='X()'>X</button>
+  <button onClick='Y()'>Y</button>
+  <button onClick='Z()'>Z</button>
+</div>
 
 <div id="slider1">LED Brightness</div>
 
