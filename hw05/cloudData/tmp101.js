@@ -26,13 +26,17 @@ var temp = [];
 
 // Read the temp sensors
 for(var i=0; i<tmp101.length; i++) {
-    temp[i] = sensor.readByteSync(tmp101[i], 0x0);
+    if (i === 2){
+        temp[i] = sensor.readByteSync(tmp101[i], 0x1);
+    } else {
+        temp[i] = sensor.readByteSync(tmp101[i], 0x0);
+    }
     // temp[i] = Math.random();
     console.log("temp: %dC, %dF (0x%s)", temp[i], temp[i]*9/5+32, tmp101[i].toString(16));
 }
 
 // Substitute in the temperatures
-var url = util.format(urlBase, temp[0], temp[1], temp[2]);
+var url = util.format(urlBase, temp[0]*9/5+32, temp[1]*9/5+32, temp[2]*9/5+32);
 console.log("url: ", url);
 
 // Send to phant
