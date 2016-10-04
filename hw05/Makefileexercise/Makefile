@@ -79,7 +79,7 @@ all: app.arm
 # ------ executable rule (.x) -------
 # -----------------------------------
 app.arm: app.o
-	$(CC) $(CLFAGS)  $(LINKER_FLAGS) app.o -o app.arm
+	$(CC) $(CLFAGS)  $(LINKER_FLAGS) app.o -o $@
 	@echo; echo $@ successfully created; echo
 
 
@@ -88,7 +88,7 @@ app.arm: app.o
 # ------ intermeditate object files rule (.o) -------
 # ---------------------------------------------------
 %.o: %.c
-	$(CC) $(CLFAGS) -c $< -o app.o
+	$(CC) $(CLFAGS) -c $< -o $@
 
 
 
