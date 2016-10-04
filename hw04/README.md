@@ -11,3 +11,9 @@ light up in the browser and the appropriate LED in the LED matrix with the appro
 the same color on it will turn it off. 
 
 There are now buttons to clear the screen and buttons for preset letters of the alphabet.
+
+==========
+Prof. Yoder's comments
+Looks good.
+
+Grade:  10/10
