@@ -68,15 +68,12 @@ function move() {
     //console.log(averageReading);
     // Switch directions if at end.
     if (pos >= max) {
-    //    direction *= -1;
-    //}
-    //if (pos <= min){
         clearInterval(timer);
         direction *= -1;
         timer = setInterval(returnToLowest, ms);
         console.log(minPosition);
         return;
-        //direction *= -1; add back in if doing multiple rotations
+        
     }
     rotate(direction);
 }
@@ -87,8 +84,23 @@ function returnToLowest(){
     pos--;
     if (pos < minPosition){
         clearInterval(timer);
-        console.log("done");
+        setTimeout(trackingMode, 1000);
     }
+}
+
+function trackingMode(){
+    console.log("Turing on the Beagle!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    setInterval(track, ms);
+}
+function track(){
+    sensorReading1 = b.analogRead(sensor1) * 18 / 10;
+    sensorReading2 = b.analogRead(sensor2) * 18 / 10;
+    if (sensorReading1 < sensorReading2){
+        direction = CW;
+    } else {
+        direction = CCW;
+    }
+    rotate(direction);
 }
 
 // This is the general rotate
