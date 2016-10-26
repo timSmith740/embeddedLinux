@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 var b = require('bonescript');
 var button1 = 'P9_28';
-var LED1 = 'P9_29';
+var LED1 = 'P9_27';
 
 var state1 = b.HIGH;
 
