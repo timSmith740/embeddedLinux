@@ -3,7 +3,7 @@ var b = require('bonescript');
 var button1 = 'P9_28';
 var LED1 = 'P9_27';
 
-var state1 = b.HIGH;
+var state1 = b.LOW;
 
 b.pinMode(button1, b.INPUT, 7, 'pulldown');
 b.pinMode(LED1, b.OUTPUT);

@@ -22,7 +22,6 @@ int main(int argc, char *argv[]){
     while(1){
         if(*gpio_datain3 & GPIO_28) {
             *gpio_setdataout_addr = GPIO_27;
-            *gpio_cleardataout_addr = GPIO_27;
     	} else {
     	    *gpio_cleardataout_addr = GPIO_27;
     	}
