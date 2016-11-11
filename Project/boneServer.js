@@ -77,11 +77,6 @@ io.sockets.on('connection', function (socket) {
                 if(error) { console.log('error: ' + error); }
                 if(stderr) {console.log('stderr: ' + stderr); }
                 fs.readFile("./faceValues.txt", 'utf8', function(err, data){
-                    console.log(data[0]);
-                    console.log(data[1]);
-                    console.log(data[2]);
-                    console.log(data[3]);
-                    console.log(data[4]);
                     socket.emit('send', data);
                 })
             });
