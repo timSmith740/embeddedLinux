@@ -1,0 +1,80 @@
+<head> </head>
+<title>Fun Face Cam </title>
+<link rel="stylesheet" type="text/css" href="boneServer.css">
+
+
+ <html>
+<body bgcolor="#40E0D0">
+<body> <h1><center> Fun Face Cam </h1> </body>
+<nav>
+	
+	
+	
+<body><center> 
+
+ <button id="connect1" onclick='connect()'/>Connect</button>
+  <button id="connect3" onclick= "myFunction()">Refresh</button> 
+ 
+    <button type="button" onclick="kill()">Kill</button> 
+    
+    
+    
+
+
+
+
+<script>
+const exec = require('child_process').exec;
+function myFunction() {
+    location.reload();
+}
+
+
+function AddMustache() {
+ 
+    var x = document.createElement("IMG");
+    x.setAttribute("src", "mustache.png");
+    x.setAttribute("width", "200");
+    x.setAttribute("width", "200");
+    x.setAttribute("alt", "mustache");
+    x.setAttribute("class", "funFace");
+    document.body.appendChild(x);
+    
+
+}
+
+
+// function DoC(){
+    
+    
+    
+//     exec('./app', (error, stdout, stderr) => {
+//          if (error) {
+//             console.error(`exec error: ${error}`);
+//             return;
+//         }
+//         console.log(`stdout: ${stdout}`);
+//         console.log(`stderr: ${stderr}`);
+//     });
+
+// }
+
+</script>
+
+<button id="connect2" onclick= "buttonAdd()">Mustache</button>
+
+
+    
+<button id="connect3" onclick= "buttonHat()">Hat</button>
+<button id="connect4" onclick= "buttonSunglasses()">Sunglasses</button>
+<button id="connect5" onclick= "takePicture()">Take a picture</button>
+<P></P>
+<P class ="location">
+<IMG  class="picture" SRC="face.png" WIDTH=320 HEIGHT=240 x>    
+</P>
+<script src="/socket.io/socket.io.js"></script>
+<script src="buttonBlink.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</body>
+
+</html> 
