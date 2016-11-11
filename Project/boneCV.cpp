@@ -10,6 +10,7 @@
  */
 
 #include<iostream>
+#include<fstream>
 #include<opencv2/opencv.hpp>
 #include "opencv2/objdetect/objdetect.hpp"
 #include "opencv2/highgui/highgui.hpp"
@@ -59,6 +60,7 @@ int main()
 /** @function detectAndDisplay */
 void detectAndDisplay( Mat frame )
 {
+  ofstream faceValues;
   std::vector<Rect> faces;
   Mat frame_gray;
 
@@ -67,13 +69,13 @@ void detectAndDisplay( Mat frame )
 
   //-- Detect faces
   face_cascade.detectMultiScale( frame_gray, faces, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, Size(30, 30) );
-
+  faceValues.open("faceValues.txt");
   for( size_t i = 0; i < faces.size(); i++ )
   {
-    cout << faces[i].x << endl;
-    cout << faces[i].y << endl;
-    cout << faces[i].width << endl;
-    cout <<faces[i].height<<endl;
+    faceValues << faces[i].x << endl;
+    faceValues << faces[i].y << endl;
+    faceValues << faces[i].width << endl;
+    faceValues <<faces[i].height<<endl;
     Point center( faces[i].x + faces[i].width*0.5, faces[i].y + faces[i].height*0.5 );
     ellipse( frame, center, Size( faces[i].width*0.5, faces[i].height*0.5), 0, 0, 360, Scalar( 255, 0, 255 ), 4, 8, 0 );
 
@@ -90,6 +92,7 @@ void detectAndDisplay( Mat frame )
        circle( frame, center, radius, Scalar( 255, 0, 0 ), 4, 8, 0 );
      }
   }
+  faceValues.close();
   //-- Show what you got
   imwrite( "face.png", frame );
  }
