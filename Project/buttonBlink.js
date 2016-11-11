@@ -52,11 +52,16 @@ function takePicture(){
 function hello(){
 	console.log('Hello World');
 }
+
+function status_update(txt){
+	$('#status').html(txt);
+    }
+    
 hello();
 
 function connect() {
       if(firstconnect) {
-        socket = io.connect(null);
+        socket = io.connect('http://192.168.7.2:9090');
 
         // See https://github.com/LearnBoost/socket.io/wiki/Exposed-events
         // for Exposed events
@@ -72,14 +77,9 @@ function connect() {
             { status_update("Reconnecting in " + nextRetry/1000 + " s"); });
         socket.on('reconnect_failed', function()
             { message("Reconnect Failed"); });
-            console.log("test");
-
-    /*
-	i2c_smbus_write_byte(file, 0x21); 
-	i2c_smbus_write_byte(file, 0x81);
-	i2c_smbus_write_byte(file, 0xe7);
-    */
-        // Read display for initial image.  Store in disp[]
+        socket.on('picture', function () {
+        	console.log("hello");
+        	location.reload(); });
 
         firstconnect = false;
       }

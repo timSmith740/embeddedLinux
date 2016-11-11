@@ -121,15 +121,15 @@ io.sockets.on('connection', function (socket) {
     });
     
     socket.on('picture', function () {
-        console.log('Got i2c request:' + i2cNum);
-        child_process.exec('boneCV',
+        console.log('Got picture request');
+        child_process.exec('./boneCV',
             function (error, stdout, stderr) {
 //     The TMP102 returns a 12 bit value with the digits swapped
                 stdout = '0x' + stdout.substring(4,6) + stdout.substring(2,4);
 //                console.log('i2cget: "' + stdout + '"');
                 if(error) { console.log('error: ' + error); }
                 if(stderr) {console.log('stderr: ' + stderr); }
-                socket.emit('i2c', stdout);
+                socket.emit('picture');
             });
     });
 
