@@ -5,43 +5,64 @@ var socket;
 var firstconnect = true;
 var faceValues = [];
 var queryTracker = 0;
+var mustache = 0;
+var glasses = 0;
+var hat = 0;
 
 
 //320 240
 function buttonMustache(){
-	var facePicX = $(window).width()/2;
-	var width = faceValues[2]*0.9;
-	var height = faceValues[3]*0.5;
-	var x = facePicX-(160-faceValues[0])+faceValues[2]*0.05;
-	var y =$('.picture').offset().top+faceValues[1]+((faceValues[3])/2)-(height/6);
-	console.log(x.toString()+"px");
-	$('.location').append('<IMG  class="remove funFace" SRC="mustache.png" WIDTH='+width+' HEIGHT='+height+'>');
-	$('.funFace').css("left",x.toString()+"px");
-	$('.funFace').css("top",y.toString()+"px");
+	if (!mustache){
+		var facePicX = $(window).width()/2;
+		var width = faceValues[2]*0.9;
+		var height = faceValues[3]*0.5;
+		var x = facePicX-(160-faceValues[0])+faceValues[2]*0.05;
+		var y =$('.picture').offset().top+faceValues[1]+((faceValues[3])/2)-(height/6);
+		console.log(x.toString()+"px");
+		$('.location').append('<IMG  class="remove funFace" SRC="mustache.png" WIDTH='+width+' HEIGHT='+height+'>');
+		$('.funFace').css("left",x.toString()+"px");
+		$('.funFace').css("top",y.toString()+"px");
+		mustache = 1;
+	} else {
+		mustache = 0;
+		$('.funFace').remove();
+	}
 }
 
 function buttonHat(){
-	var facePicX = $(window).width()/2;
-	var width = faceValues[2];
-	var height = faceValues[3]*0.8;
-	var x = facePicX-(160-faceValues[0]);
-	var y =$('.picture').offset().top+faceValues[1]-(height/8)*7;
-	console.log(x.toString()+"px");
-	$('.location').append('<IMG  class="remove funFace2" SRC="hat.png" WIDTH='+width+' HEIGHT='+height+'>');
-	$('.funFace2').css("left",x.toString()+"px");
-	$('.funFace2').css("top",y.toString()+"px");
+	if (!hat){
+		hat = 1;
+		var facePicX = $(window).width()/2;
+		var width = faceValues[2];
+		var height = faceValues[3]*0.8;
+		var x = facePicX-(160-faceValues[0]);
+		var y =$('.picture').offset().top+faceValues[1]-(height/8)*7;
+		console.log(x.toString()+"px");
+		$('.location').append('<IMG  class="remove funFace2" SRC="hat.png" WIDTH='+width+' HEIGHT='+height+'>');
+		$('.funFace2').css("left",x.toString()+"px");
+		$('.funFace2').css("top",y.toString()+"px");
+	} else{
+		hat = 0;
+		$('.funFace2').remove()
+	}
 }
 
 function buttonSunglasses(){
-	var facePicX = $(window).width()/2;
-	var width = faceValues[2]*0.8;
-	var height = faceValues[3]*0.25;
-	var x = facePicX-(160-faceValues[0])+faceValues[2]*0.1;
-	var y =$('.picture').offset().top+faceValues[1]+((faceValues[3])/2)-height;
-	console.log(x.toString()+"px");
-	$('.location').append('<IMG  class="remove funFace3" SRC="sunglasses.png" WIDTH='+width+' HEIGHT='+height+'>');
-	$('.funFace3').css("left",x.toString()+"px");
-	$('.funFace3').css("top",y.toString()+"px");
+	if (!glasses){
+		glasses = 1;
+		var facePicX = $(window).width()/2;
+		var width = faceValues[2]*0.8;
+		var height = faceValues[3]*0.25;
+		var x = facePicX-(160-faceValues[0])+faceValues[2]*0.1;
+		var y =$('.picture').offset().top+faceValues[1]+((faceValues[3])/2)-height;
+		console.log(x.toString()+"px");
+		$('.location').append('<IMG  class="remove funFace3" SRC="sunglasses.png" WIDTH='+width+' HEIGHT='+height+'>');
+		$('.funFace3').css("left",x.toString()+"px");
+		$('.funFace3').css("top",y.toString()+"px");
+	} else{
+		glasses = 0;
+		$('.funFace3').remove()
+	}
 }
 
 function takePicture(){
