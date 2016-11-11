@@ -43,6 +43,7 @@ int main()
     if(!capture.isOpened()){
 	    cout << "Failed to connect to the camera." << endl;
     }
+    // Taking a picture
     Mat frame, edges;
     capture >> frame;
     if(frame.empty()){
@@ -72,6 +73,7 @@ void detectAndDisplay( Mat frame )
   faceValues.open("faceValues.txt");
   for( size_t i = 0; i < faces.size(); i++ )
   {
+      //save to a file
     faceValues << faces[i].x << endl;
     faceValues << faces[i].y << endl;
     faceValues << faces[i].width << endl;

@@ -4,13 +4,12 @@
 var socket;
 var firstconnect = true;
 var faceValues = [];
-var queryTracker = 0;
+var queryTracker = 0; //This is used to replace the image to add a query string, so we can place an image of the same name
 var mustache = 0;
 var glasses = 0;
 var hat = 0;
 
-
-//320 240
+//functions for placing mustaches, hats, and sunglasses
 function buttonMustache(){
 	if (!mustache){
 		var facePicX = $(window).width()/2;
@@ -104,7 +103,12 @@ function connect() {
       }
     }
     
+// This function parses data received from the boneServer
 function interpret(data){
+	if (data.length === 0){
+		alert("Face was not found please take a picture again");
+		return;
+	}
 	$('.remove').remove();
 	$('.location').append('<IMG  class="remove picture" SRC="./face.png?foo='+queryTracker+'"WIDTH=320 HEIGHT=240> ');
 	queryTracker++;
